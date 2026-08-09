@@ -1,0 +1,293 @@
+<html>
+
+<HEAD>
+    <TITLE>
+        NGOOOOOOOO
+    </TITLE>
+    <!--<link rel="stylesheet" href="css/ngofindmed.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+        let myymodule = angular.module("modulekuj", []);
+        let myycontroller = myymodule.controller("controllerkuj", function ($scope, $http) {
+            $scope.fetchcities = function () {
+                let url = "/fetch-distinct-cities";
+                $http.get(url).then(function (resp) {
+                    //alert(JSON.stringify(resp.data))
+                    $scope.jsoncity = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            $scope.fetchmedngo = function () {
+                let cityy = $("#citysel").val();
+                let url = "/fetch-med-ngo?c=" + cityy;
+                $http.get(url).then(function (resp) {
+                    $scope.jsonmed = resp.data;
+                }, function (err) {
+                    alert(err);
+                }
+                )
+            }
+            $scope.fetchmedcardss = function () {
+                let med = $("#medsel").val();
+                let cityy = $("#citysel").val();
+                let url = "/fetch-med-cardss?m=" + med + "&c=" + cityy;
+                $http.get(url).then(function (resp) {
+                    $scope.jsoncardd = resp.data;
+                }, function (err) {
+                    alert(err.message);
+                }
+                )
+            }
+            $scope.fetchinfo = function (obj) {
+                //  alert("heelooo");
+                $scope.objOne = obj;
+                //in javascript no brackets just direct 
+                let edonor = obj.emailid
+                let url = "/fetch-donor-details?email=" + edonor;
+
+                $http.get(url).then(function (resp) {
+                    $scope.objdonorr = resp.data;
+
+                }, function (err) {
+                    alert(err.message);
+                }
+                )
+
+            }
+        })
+
+    </script>
+</HEAD>
+
+<BODY ng-app="modulekuj" ng-controller="controllerkuj" ng-init="fetchcities();"
+    style="background:linear-gradient(to right,#eef7f0,#f8fcf9); background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;">
+   <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
+        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
+            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
+                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
+
+        </div>
+        <div class="container">
+
+
+
+            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+                <ul class="navbar-nav mx-auto">
+     <li class="nav-item mx-5" style="font-size: 30px;">
+    <a class="nav-link" href="ngo-dashboard.html">
+     <i class="fa-solid fa-user-check" style="color: rgb(244, 243, 236);"></i>
+       Ngo Page
+    </a>
+</li>
+
+                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+                        <a class="nav-link" href="ngo-profile.html">
+                            <i class="fa-solid fa-hand-holding-heart me-1"></i>
+                            Profile
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                        <a class="nav-link" href="ngofindEqp.html">
+                             <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                            Equipment
+                        </a>
+                    </li>
+                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                        <a class="nav-link" href="ngoFindMed.html">
+                            <i class="fa-solid fa-pills"></i>
+                            Medicines
+                        </a>
+                    </li>
+
+
+
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <br><br><br> <br><br><br> <br><br><br>
+
+    <div style="width: 2520px; height: 400px;  background-color: linear-gradient(to bottom,#ffffff,#f8fbff); margin-top: 80px; margin-left: 210px; border-radius: 50px; border-color:#1976D2 ; border-width: 4px; border-style: solid;">
+        <div style="float: left; margin-left: 100px; margin-top: 100px;">
+        <p style="font-size: 50px; color: #1976D2; font-weight: bold">
+            Choose City:
+        </p>
+        <p style="font-size: 30px;">
+            <input list="city-list" placeholder="type or select.." id="citysel" style="width: 600px; height: 70px; font-size: 40px;">
+            <datalist id="city-list">
+                <option ng-repeat="obj in jsoncity" value="{{obj.city}} "></option>
+
+            </datalist>
+        </p>
+    </div>
+    <div style="float: left; margin-left: 100px; margin-top: 100px;">
+        <p style="font-size: 50px; color: #1976D2; font-weight: bold"" >
+            Medicines
+        </p>
+        <p style="font-size: 30px;">
+            <input list="med-list" placeholder="type or select.." id="medsel" style="width: 600px; height: 70px; font-size: 40px;">
+            <datalist id="med-list">
+                <option ng-repeat="obj in jsonmed" value="{{obj.medname}}"></option>
+            </datalist>
+            <input type="button" value="choose medicine " ng-click="fetchmedngo();" style="margin-left: 30px; width: 500px; height: 60px; color: white; font-weight: bold; font-size: 35px;" class="btn btn-primary">
+        </p>
+    </div>
+    <div style="float:left; margin-left:-550px; margin-top:250px; font-size:30px;">
+        <input type="button" value="get info" ng-click="fetchmedcardss();" style="  margin-top: 30px; width: 500px;  margin-left:-550px; color: white; font-weight: bold; font-size: 35px;" class="btn btn-primary"">
+    </div>
+    </div>
+    <br>
+    <br><br>
+    <div>
+
+        <div class="row g-4" style="margin-left: 80px; margin-right: 80px;">
+
+            <div class="col-lg-3 col-md-6" ng-repeat="obj in jsoncardd">
+
+                <div class="card h-100 shadow-lg border-0" >
+
+                    <img ng-src="{{obj.picurl}}" class="card-img-top" style="height:300px; object-fit:contain;">
+
+                    <div class="card-body">
+
+                        <h3 class="card-title text-center text-primary fw-bold">
+                            {{obj.medname}}
+                        </h3>
+
+                        <hr>
+
+                        <p class="fs-5">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <b> Expiry:</b> {{obj.expdate.substring(0,obj.expdate.indexOf("T"))}}
+                        </p>
+
+                        <p class="fs-5">
+                            <i class="fa-solid fa-box"></i>
+                            <b> Packing:</b> {{obj.packing}}
+                        </p>
+
+                        <p class="fs-5">
+                            <i class="fa-solid fa-capsules"></i>
+                            <b> Quantity:</b> {{obj.qty}}
+                        </p>
+                        <p>
+                            <center>
+                                <input type="button" class="btn btn-primary" value="Fetch info" style="font-size: 20px;"
+                                    ng-click="fetchinfo(obj);" data-bs-toggle="modal" data-bs-target="#fettch">
+                            </center>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="fettch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="font-size: 50px;">Medicine Details</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                        <tr>
+                            <th>Medicine name</th>
+                            <th>Exp date</th>
+                            <th>Company</th>
+                            <th>Packing</th>
+                            <th>Quantity</th>
+                            <th>Other info.</th>
+
+                        </tr>
+                        <tr>
+                            <td>{{objOne.medname}}</td>
+                            <td>{{objOne.expdate.substring(0,objOne.expdate.indexOf("T"))}}</td>
+                            <td>{{objOne.company}}</td>
+                            <td>{{objOne.packing}}</td>
+                            <td>{{objOne.qty}}</td>
+                            <td>{{objOne.info}}</td>
+
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <p style="font-size: 50px;">Donor Details</p>
+                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                        <tr>
+                            <th>Email id</th>
+                            <th>Name</th>
+                            <th>Mobile</th>
+                            <th>Address</th>
+                            <th>City</th>
+
+
+                        </tr>
+
+                        <tr ng-repeat="objdonor in objdonorr">
+                            <td>{{objdonor.email_id}}</td>
+                            <td>{{objdonor.name}}</td>
+                            <td>{{objdonor.mobile}}</td>
+                            <td>{{objdonor.address}}</td>
+                            <td>{{objdonor.city}}</td>
+                        </tr>
+
+                    </table>
+                    <br>
+                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                        <tr>
+                            <th>
+                                Adhar card
+                            </th>
+                            <th>
+                                Profile pic
+                            </th>
+                        </tr>
+                        <tr ng-repeat="obj in objdonorr">
+                            <td>
+                                <img src="{{obj.acardpath}}" style="width:250px; height:180px; object-fit:contain;">
+                            </td>
+                            <td>
+                                <img src="{{obj.picpath}}" style="width:250px; height:180px; object-fit:contain;">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" style="font-size: 30px;"
+                        data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</BODY>
+
+</html>

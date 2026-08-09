@@ -1,0 +1,208 @@
+<html>
+
+<head>
+    <title>
+        NGO SEARCH
+    </title>
+    <title>NGO DASHBPARD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+        let myymodule = angular.module("modulekuj", []);
+        let myycontroller = myymodule.controller("controllerkuj", function ($scope, $http) {
+            $scope.fetchcities = function () {
+                let url = "/fetch-distinctngo-cities";
+                $http.get(url).then(function (resp) {
+                    //alert(JSON.stringify(resp.data))
+                    $scope.jsoncity = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+
+            $scope.showngos = function () {
+                let c = $("#cityselected").val();
+                let url = "/show-ngos?city=" + c;
+                $http.get(url).then(function (resp) {
+                    $scope.ngocard = resp.data;
+
+                }, function (err) {
+                    alert(err);
+                })
+            }
+            $scope.fetchinfongo = function (obj) {
+                $scope.objone = obj;
+            }
+        })
+    </script>
+</head>
+
+<body ng-app="modulekuj" ng-controller="controllerkuj" ng-init="fetchcities();"
+    style="background:linear-gradient(to right,#eef7f0,#f8fcf9); background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;">
+ <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
+        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
+            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
+                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
+
+        </div>
+        <div class="container">
+
+
+
+            <div class="collapse navbar-collapse" id="menu" style="margin-left: 100px;">
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item mx-5" style="font-size: 30px;">
+                        <a class="nav-link active" href="startingpage.html">
+                            <i class="fa-solid fa-house me-1"></i> Home
+                        </a>
+                    </li>
+
+                   
+                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                        <a class="nav-link" href="needy-profile.html">
+                           <i class="fa-solid fa-droplet" ></i>
+                           Profile
+                        </a>
+                    </li>
+                     
+               
+
+                   
+
+                </ul>
+
+            </div>
+      
+        </div>
+    </nav>
+    <br><br> <br><br> <br><br>
+    <div
+        style="width: 2520px; height: 350px;  background-color: linear-gradient(to bottom,#ffffff,#f8fbff); margin-top: 80px; margin-left: 210px; border-radius: 50px; border-color:#1976D2 ; border-width: 4px; border-style: solid;">
+        <div style="float: left; margin-left: 450px; margin-top: 80px;">
+            <p style="font-size: 50px;  color: #1976D2; font-weight: bold">
+                Choose City:
+            </p>
+            <div>
+                <p style="font-size: 30px; float: left;">
+                    <input list="city-list" id="cityselected" placeholder="type or select.. "
+                        style="width: 1000px; height: 80px; border-color: black ; font-size: 40px; ">
+                    <datalist id="city-list">
+                        <option ng-repeat="obj in jsoncity" value="{{obj.city}} "></option>
+
+                    </datalist>
+                </p>
+                <p>
+                    <input type="button" value="Find Ngo"
+                        style="float: left; width: 700px; height: 80px; margin-top: -100px; margin-left: 1050px; font-size: 30px; "
+                        class="btn btn-primary" ng-click="showngos();">
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="row g-4" style="margin-top: 30px; margin-left: 195px;">
+
+        <div class="col-lg-3 col-md-6" ng-repeat="obj in ngocard">
+
+            <div class="card h-100 shadow-lg border-0">
+
+                <img ng-src="{{obj.picurll}}" class="card-img-top" style="height:300px; object-fit:contain;">
+                <hr>
+                <div class="card-body">
+                    <center>
+                        <h3 style="font-size: 50px;">{{obj.ngo}}</h3>
+                    </center>
+                    <hr style="width: 100%;">
+                    <p class="fs-5" style="font-size: 30px;">
+                        <i class="fa-solid fa-box"></i>
+                        <b style="font-size: 25px;">Registration Office:</b> <b
+                            style="font-size:25px">{{obj.regoffice}}</b>
+                    </p>
+                    <p>
+                        <center>
+                            <input type="button" class="btn btn-primary" value="Fetch info"
+                                style="font-size: 27px; margin-top: 20px;" ng-click="fetchinfongo(obj);"
+                                data-bs-toggle="modal" data-bs-target="#fetchh">
+                        </center>
+                    </p>
+                    <div class="modal fade" id="fetchh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                        <div class="modal-dialog modal-xl" style="max-width: 2000px;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div style="font-size: 50px;">Equipment Details</div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-success table-striped-columns" style="font-size: 27px;  table-layout:fixed; word-wrap:break-word;">
+                                        <tr>
+                                            <th style="width: 90px;">SrNo</th>
+                                            <th style="width: 100px;">Name</th>
+                                            <th style="width: 200px;">Email-id</th>
+                                            <th style="width: 250px;">Address</th>
+                                            <th style="width: 200px;">Website</th>
+
+                                            <th style="width: 200px;">Contact No.</th>
+                                            <th style="width: 200px;">Since</th>
+                                            <th style="width: 200px;">Chairperson</th>
+                                            <th style="width: 200px;">Other Info.</th>
+                                            <th style="width: 200px;">Registration No.</th>
+
+                                        </tr>
+                                        <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>{{objone.ngo}}</td>
+                                            <td>{{objone.emailid}}</td>
+                                            <td>{{objone.city}}</td>
+                                            <td>{{objone.website}}</td>
+                                            <td>{{objone.contact_no}}</td>
+                                            <td>{{objone.since.substring(0,objone.since.indexOf('T'))}}</td>
+                                            <td>{{objone.chairperson}}</td>
+                                            <td>{{objone.ngoworks}}</td>
+                                            <td>{{objone.regnumber}}</td>
+
+                                        </tr>
+                                    </table>
+                                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                                        <tr>
+                                            <th>Picture</th>
+                                        </tr>
+                                        <td >
+                                            <center><img ng-src="{{objone.picurll}}"  style="width:300px; height:250px; object-fit:contain;"></center>
+                                        </td>
+                                    </table>
+
+                                </div>
+
+
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" style="font-size: 30px;"
+                                        data-bs-dismiss="modal">Close</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

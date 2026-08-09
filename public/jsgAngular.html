@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>
+            jsg angular
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+        <script>
+            let myymodule=angular.module("modulekuj",[]);
+            let myycontroller=myymodule.controller("controllerkuj",function($scope)
+            {
+                $scope.fn="Aakriti";
+                $scope.ln="Bansal";
+                $scope.full="";
+                //function to join name
+                $scope.dojoin=function(){
+                    $scope.full=$scope.fn+" "+$scope.ln;
+                }
+                //for ary
+                $scope.ary=["jan","feb","march","april","may","june","july","aug"];
+
+                //==========
+                $scope.jsonarr=[
+                    {"emailid":"bcebbti","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"sst","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"bti","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"real","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"java","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"bcebbti","pwd":"Admion123","mobile":"1233444"},
+                    {"emailid":"bcebbti","pwd":"Admion123","mobile":"1233444"}
+                ]
+
+            })
+        </script>
+    </head>
+    <center>
+    <body ng-app="modulekuj" ng-controller="controllerkuj">
+       <p>
+         First name:<input type="text" ng-model="fn"> 
+       </p>
+       <p>
+        Last name:<input type="text" ng-model="ln">
+       </p>
+       <p>
+        <input type="button" value="JOIN NAME" ng-click="dojoin()">
+       </p>
+       <p>
+         Full name:<input type="text" ng-model="full">
+       </p>
+        <hr><hr>
+        <p>
+            Select month:
+            <select>
+                <option value="none">Select</option>
+                <option ng-repeat="obj in ary">{{obj}} </option>
+            </select>
+        </p>
+        <hr><hr>
+        <table width="400" border="1">
+            <tr>
+                  <th>Sr.no</th>
+                  <th>Emailid</th>
+                  <th>Password</th>
+                  <th>Mobile</th>
+                  <th>Operations</th>
+            </tr>
+            <tr ng-repeat="obj in jsonarr" >
+                <td>{{$index+1}}</td>
+                <td>{{obj.emailid}}</td>
+                <td>{{obj.pwd}}</td>
+                <td>{{obj.mobile}}</td>
+               <td> <center><input type="button" value="Delete"></center></td>
+            </tr>
+
+        </table>
+    </body>
+    </center>
+</html>

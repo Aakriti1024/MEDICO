@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical Donation Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .section-heading {
+            background-color: #dbeafe;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 10px;
+            color: #0d47a1;
+        }
+
+        .service-card {
+            height: 250px;
+            transition: 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px gray;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0d47a1;
+        }
+
+        footer {
+            background: #0d47a1;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSignup").click(function () {
+                if ($("#txtEmail").val().trim() == "") {
+                    alert("Email is required");
+                    $("#txtEmail").focus();
+                    return;
+                }
+
+                if ($("#txtPwd").val().trim() == "") {
+                    alert("Password is required");
+                    $("#txtPwd").focus();
+                    return;
+                }
+
+                if ($("#utype").val() == "none") {
+                    alert("Select User Type");
+                    $("#utype").focus();
+                    return;
+                }
+                let obj = {
+                    url: "/signup-route",
+
+                    data: {
+                        emailkuch: $("#txtEmail").val(),
+                        pwdkuch: $("#txtPwd").val(),
+                        userkuch: $("#utype").val()
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    $("#msgSpan").html(respStrr);
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+    <!--------------LOGIN-----AJAX btnclick----------------->
+    <script>
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                let obj = {
+                    url: "/login-route",
+                    data: {
+                        emailLogin: $("#txtEmail2").val(),
+                        pwdLogin: $("#txtPwd2").val(),
+
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    $("#msgSpan2").html(respStrr);
+                    if(respStrr=="donor"){
+//send us to that page 
+   localStorage.setItem("activeuser",$("#txtEmail2").val());
+                        location.href="donor-dashboard.html"
+                        //localstorage is the global obrject
+                        //value of login is taken
+                     
+                    }
+                    else if(respStrr=="needy"){
+                        localStorage.setItem("activeuser",$("#txtEmail2").val());
+                        location.href="needy-profile.html"
+                    }
+                 else if (respStrr.trim() == "ngo") {
+
+        localStorage.setItem("activengo", $("#txtEmail2").val());
+        location.href = "ngo-dashboard.html";
+
+    }
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+
+    <!-------------------signup blur ajax----------------->
+    <script>
+        $(document).ready(function () {
+            $("#txtEmail").blur(function () {
+                let email = $("#txtEmail").val();
+                if (email == "") return;
+                let obj = {
+                    url: "/email-check",
+                    data: {
+                        emailcheck: $("#txtEmail").val()
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    alert(respStrr);
+
+                    $("#txtEmail").val("");   // clear textbox
+                    $("#txtEmail").focus();   // put cursor back
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+    <!--for password eeye signup-->
+    <script>
+        $(document).ready(function () {
+
+            $("#eyee").click(function () {
+
+                if ($("#txtPwd").attr("type") == "password") {
+                    $("#txtPwd").attr("type", "text");
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+                else {
+                    $("#txtPwd").attr("type", "password");
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+
+            });
+
+        });
+    </script>
+    <!-------------login eye-->
+    <script>
+
+        $(document).ready(function () {
+
+            $("#eyel").click(function () {
+                //for adding new class prev is to be removed
+                if ($("#txtPwd2").attr("type") == "password") {
+                    $("#txtPwd2").attr("type", "text");
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+                else {
+                    $("#txtPwd2").attr("type", "password");
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+
+            });
+
+        });
+    </script>
+
+    <!------------regex---------->
+    <script>
+        $(document).ready(function () {
+            $("#txtEmail").blur(function () {
+                let e = $(this).val();
+                if (e == "") return;
+                let emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+                if (!emailReg.test(e)) {
+                    alert("INVALID EMAIL");
+                    $(this).val("").focus();
+
+                }
+            })
+            $("#txtPwd").blur(function () {
+                let pwd = $(this).val();
+                if (pwd == "") return;
+                let pwdReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+                if (!pwdReg.test(pwd)) {
+                    alert("INVALID PASS")
+                    $(this).val("").focus();
+
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
+        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
+            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
+                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
+
+        </div>
+        <div class="container">
+
+
+
+            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item mx-5" style="font-size: 30px;">
+                        <a class="nav-link active" href="#">
+                            <i class="fa-solid fa-house me-1"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+                        <a class="nav-link" href="#services">
+                            <i class="fa-solid fa-hand-holding-heart me-1"></i>
+                            Services
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                        <a class="nav-link" href="#about">
+                            <i class="fa-solid fa-circle-info me-1"></i>
+                            About
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contact">
+                            <i class="fa-solid fa-phone me-1"></i>
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+            <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal"
+                data-bs-target="#signupModal"
+                style="font-size: 40px; color: white; width: 7000px;  margin-left: 790px; border-color: white;">SIGNUP</button>
+            <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#loginModal"
+                style="font-size: 40px; color: white; margin-left: 20px; border-color: white;">LOGIN</button>
+
+        </div>
+    </nav>
+
+    <!--signupp loginnn-->
+    <!-----------------SIGN UP--------------------------->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog modal-xl" style="max-width:40%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"
+                        style="margin: auto; margin-left: 500px; margin-bottom: 10px; font-size: 60px;">Sign Up</h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                </div>
+
+                <div class="modal-body">
+                    <!-- Your signup form goes here -->
+                    <div>
+                        <img src="pics1/user-icon-member-login-isolated-vector.jpg.webp"
+                            style="width: 100px; height: 100px; margin-left: 500px;">
+                    </div>
+                    <div style="font-size: 35px;">
+                        Email_id:
+
+                        <input type="email" style="width: 100%; margin-bottom: 20px;" name="txtEmail" id="txtEmail"
+                            placeholder="Enter your email id" required>
+                        <span id="emailcheck" style="margin-bottom:40px;"></span>
+                    </div>
+                    <br>
+                    <div style="font-size: 35px;">
+                        Password:
+                        <input type="password" style="width: 90%; margin-bottom:20px;" name="txtPwd" id="txtPwd"
+                            placeholder="Enter password " required>
+                        <i class="fa-solid fa-eye-slash" id="eyee" style="cursor: pointer;"></i>
+                    </div>
+                    <br>
+                    <div style="margin-bottom: 20px; font-size: 35px;">
+
+                        User_type:
+                        <select name="utype" id="utype">
+                            <option value="none">Select</option>
+                            <option value="donor">DONOR</option>
+                            <option value="needy">NEEDY</option>
+                            <option value="ngo">NGO</option>
+
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="button" value="Signup" id="btnSignup" class="btn btn-primary"
+                            style="margin-bottom: 20px; width: 80%; margin-left: 100px; font-size: 40px;">
+                    </div>
+                    <div>
+                        <span id="msgSpan" style="font-size: 30px;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!------------------------LOGIN------------------------>
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-xl" style="max-width:40%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"
+                        style="margin: auto; margin-left: 500px; margin-bottom: 10px; font-size: 60px;">
+                        Login
+                    </h4>
+
+                    <div>
+
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <img src="pics1/user-icon-member-login-isolated-vector.jpg.webp"
+                            style="margin-left: 500px; width: 100px; height: 100px;">
+                    </div>
+                    <div style="font-size: 35px;">
+                        Email_id:
+
+                        <input type="email" style="width: 100%; margin-bottom:20px;" name="txtEmail2" id="txtEmail2"
+                            placeholder="Enter your email id">
+
+                    </div><br>
+                    <div style="font-size: 35px;">
+                        Password:
+                        <input type="password" style="width: 90%; margin-bottom:20px;" name="txtPwd2" id="txtPwd2"
+                            placeholder="Enter password ">
+                        <i class="fa-solid fa-eye-slash" id="eyel" style="cursor: pointer;"></i>
+                    </div><br>
+                    <div>
+                        <input type="button" value="Login" id="btnLogin" style="font-size: 35px;"
+                            class="btn btn-primary" style="margin-left:50px; width: 80%; margin-bottom: 20px;">
+                    </div>
+                    <div>
+                        <span id="msgSpan2" style="font-size: 30px;"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--contact modal-->
+    <div class="modal fade" id="contact" tabindex="-1">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary text-white" style="font-size: 30px;">
+                    <h2 class="modal-title">
+                        <i class="fa-solid fa-address-book me-2"></i>
+                        Contact Us
+                    </h2>
+
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal">
+                    </button>
+                </div>
+
+                <div class="modal-body text-center">
+
+                    <p class="mb-3" style="font-size: 30px;">
+                        <i class="fa-solid fa-envelope text-primary"></i><br>
+                        <strong>Email</strong><br>
+                        aakriti@gmail.com
+                    </p>
+
+                    <p class="mb-3" style="font-size: 30px;">
+                        <i class="fa-solid fa-phone text-primary"></i><br>
+                        <strong>Phone</strong><br>
+                        +91 77175-02547
+                    </p>
+
+                    <p class="mb-0" style="font-size: 30px;">
+                        <i class="fa-solid fa-location-dot text-primary"></i><br>
+                        <strong>Address</strong><br>
+                        Malout, Punjab
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- CAROUSEL -->
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500"
+        style="margin-top: 200px;">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img src="pics1/ChatGPT Image Jul 23, 2026 at 07_29_30 AM.png" class="d-block w-100" height="670">
+            </div>
+
+            <div class="carousel-item">
+                <img src="pics1/ChatGPT Image Jul 23, 2026 at 07_53_28 AM.png" class="d-block w-100" height="670">
+            </div>
+
+            <div class="carousel-item">
+                <img src="pics1/ChatGPT Image Jul 23, 2026 at 07_57_19 AM.png" class="d-block w-100" height="670">
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+
+    <!-- OUR SERVICES -->
+    <div id="services">
+
+        <div class="section-heading mt-4" style="height: 100px; font-size: 50px;">
+            Our Services
+        </div>
+
+        <div class="container py-5" style="max-width: 10000px; height: 500px;">
+
+            <div class="row g-4">
+
+                <div class="col-md-3" style="height: 500px;">
+                    <div class="card service-card" style="height: 400px;">
+                        <div class="card-body text-center">
+                            <h2 style="font-weight: bold;">MEDICINE DONATION </h2>
+                        </div>
+                        <img src="pics1/ahRX2ABYCQ9UMhqp_sid414GeoU4PLl-NN6ZuMitwI7KUdbHrSzXbszgVcM34d4GQSIQtGwELho9mLHVg_FkRz6v4s3GXlpfGlciTLvaP6O31cgqFUDJZHKa9bgkkyI5zHFB2SvHyA6UrtYrRZwuZCyrP7ocBva6pJUAh8A2xQtVT4db0w2dsU9JThb3jWQC.jpeg"
+                            class="card-img-top" height="300">
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card service-card" style="height: 400px;">
+                        <div class="card-body text-center">
+                            <h2 style="font-weight: bold;">EQUIPMENT DONATION</h2>
+                        </div>
+                        <img src="pics1/XTEq23z_YK_eTdGxsgJsPeYWHdODPw5VDGzOVyk7t3NS7JzqNVV0N0w7KpXlwFmpdIKwSS6dkqX5Akrth-wlavrCcuucmHa__DiGrMoOv6uVGk2sCiKIncY9T0gXfYDa1JkfJeSmdZI9DfLta3rTtVK0ssQuegM88kuIX0pRbse2K4JNv-3996pqpKzuE1M7.jpeg"
+                            class="card-img-top" height="300">
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card service-card" style="height: 400px;">
+                        <div class="card-body text-center">
+                            <h2 style="font-weight: bold;">NGO SUPPORT</h2>
+                        </div>
+                        <img src="pics1/eW3v46ZdeYiMHPm4hBqFeykP4buIwkegCTJnhSfrXSLM-MZ6GiMydJs7vhk71RQ2bco09bDqDlfA8pcC_eBKeuFtus-lv9asr36Kkc-QaG2GUIbeZdAxbH7SAjuiRSx56lGiqzpzzz2_Dz0iwUrcndbo_-walSnNMITnVinjIJyFC_jIfESHL4rPLb3VmcYJ.jpeg"
+                            class="card-img-top" height="300">
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card service-card" style="height: 400px;">
+                        <div class="card-body text-center">
+                            <h2 style="font-weight: bold;">FIND HELP</h2>
+                        </div>
+                        <img src="pics1/S_8tfWpQzAk-M7t23KshTruS9XxY4EYYkV6FAt_UdYiX6NSqYHoOOTyjeUVAP9Ya46RJALxO5EaZUwrxCGSZjWt0c8smajMTIZGFyrM-IALo0uyiZOS9JoS8yBrIbxx6V4xT6dgeyTYORTn5yeMCHIe5fKuJLUfGgpWa14lOKLxdxBSq68tl1Y4Bu1R2a5eI.jpeg"
+                            class="card-img-top" height="300">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- KNOW US -->
+
+    <div class="section-heading" style="height: 100px; font-size: 50px;">
+        Know Us
+    </div>
+
+    <div class="container my-5" style="max-width: 10000px; ">
+
+        <div class="row g-4">
+
+            <!-- GUIDE -->
+
+            <div class="col-md-6">
+
+                <div class="card p-4">
+
+                    <h1 class="text-center mb-4">
+                        Under The Guidance Of
+                    </h1>
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-4 text-center">
+                            <img src="pics1/Screenshot 2026-08-04 at 11.56.19 AM.png" class="profile-img"
+                                style="width: 300px; height: 300px; margin-top: -50px; border-color: white;">
+                        </div>
+
+                        <div class="col-md-8">
+                            <h2><b>RAJESH BANSAL</b></h2>
+                            <p style="font-size: 30px; color: rgb(103, 103, 213);">
+                                This project was successfully completed under the expert guidance and constant support
+                                of Rajesh Bansal, whose mentorship greatly contributed to its development.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- DEVELOPER -->
+
+            <div class="col-md-6">
+
+                <div class="card p-4">
+
+                    <h1 class="text-center mb-4">
+                        Meet The Developer
+                    </h1>
+
+                    <div class="row align-items-center">
+
+                        <div class="col-md-4 text-center">
+                            <img src="pics1/WhatsApp Image 2026-08-04 at 11.52.38.jpeg" class="profile-img"
+                                style="width: 300px; height: 300px; margin-top: -50px;">
+                        </div>
+
+                        <div class="col-md-8">
+                            <h2><b>AAKRITI</b></h2>
+                            <p style="font-size: 30px; color: rgb(103, 103, 213);">
+                                Passionate Full Stack Developer and creator of this Healthcare Donation Platform,
+                                dedicated to building technology that connects donors, NGOs, and people in need through
+                                an efficient and user-friendly system.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--about-->
+    <div>
+
+
+        <div class="section-heading mt-4" style="height: 100px; font-size: 50px;">
+            About
+        </div>
+
+        <section id="about" class="py-5">
+
+            <div class="container  " style="width: 100%;">
+
+                <div class="text-center mb-5">
+
+                    <p class="text-muted" style="font-size: 40px; font-weight: bold;">
+                        Connecting Donors, NGOs, and People in Need through one platform.
+                    </p>
+                </div>
+
+                <div class="row align-items-center">
+                    <div   style="margin-left:-700px; height: 700px; width: 5000px; ">
+
+                        <img src="pics1/8HejEKb1YaMYE8a0lW0PGHTQMl6m_6kgfV7S-p_HrhlP-1G4F1L2BfmgFgpNlSKy1VXlPsAm_SVu_pxFp1gRaCqFiU0NkdjRXUOKaLlG5oY-x73Xti-WIj8YBUR2BDQ3pgDgCM1v4-l77mpAe7dJ-PS9wrA_TmBXyjLxUAXX6S8seAwZK5OtT-SM0FWW6XJe.jpeg" class="img-fluid">
+
+                    </div>
+                    <br> <br> <br>
+                    <div class="col-lg-12" style="margin-left: 600px; margin-top: -1000px;">
+                        <center>
+                        <p style="font-size: 45px; color: #0d47a1; margin-top: 200px;">
+                            Who We Are?
+                        </p>
+                    </center>
+                  
+                    <p style="text-align:justify; font-size: 30px;">
+                        <b>MediConnect</b> is a healthcare donation platform developed to bridge
+                        the gap between donors, NGOs, and individuals in need. Our mission is to
+                        reduce the wastage of unused medicines and medical equipment by making
+                        them available to people who require them.
+                    </p>
+
+                    <p style="text-align:justify; font-size: 30px;">
+                        The platform enables donors to contribute medicines and equipment,
+                        NGOs to verify and distribute donations, and beneficiaries to easily
+                        search for available healthcare resources. By encouraging responsible
+                        donations, MediConnect promotes sustainability and community welfare.
+                    </p>
+<p style="text-align:justify; font-size: 30px;">
+    Our platform is designed to provide a secure, transparent, and user-friendly experience for all users. By connecting generous donors with verified NGOs and individuals in need, MediConnect ensures that essential healthcare resources reach the right people at the right time. Together, we strive to build a healthier, more compassionate community where every contribution has the power to make a meaningful difference.
+</p>
+                    </div>
+
+
+            </div>
+            </div>
+          
+
+            </div>
+
+        </section>
+    </div>
+
+    <!-- REACH US -->
+
+    <div class="section-heading" style="height: 100px; font-size: 50px;">
+        Reach Us
+    </div>
+
+    <div class="container my-7" style="max-width: 10000px;">
+
+        <div class="card p-3">
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27588.9275846284!2d74.47582625611453!3d30.190962884845803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3917116ad1afa63b%3A0x1d21521954c5c6f1!2sMalout%2C%20Punjab%20152107!5e0!3m2!1sen!2sin!4v1784772548332!5m2!1sen!2sin"
+                width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer style="height: 80px; font-size: 30px;">
+        Copyright © 2026 Medical Donation Portal | All Rights Reserved
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

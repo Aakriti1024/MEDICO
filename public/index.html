@@ -1,0 +1,239 @@
+<html>
+
+<head>
+    <title>
+        INDEX PAGE
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!----------AJAX signup btn click -------------->
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSignup").click(function () {
+                if ($("#txtEmail").val().trim() == "") {
+                    alert("Email is required");
+                    $("#txtEmail").focus();
+                    return;
+                }
+
+                if ($("#txtPwd").val().trim() == "") {
+                    alert("Password is required");
+                    $("#txtPwd").focus();
+                    return;
+                }
+
+                if ($("#utype").val() == "none") {
+                    alert("Select User Type");
+                    $("#utype").focus();
+                    return;
+                }
+                let obj = {
+                    url: "/signup-route",
+
+                    data: {
+                        emailkuch: $("#txtEmail").val(),
+                        pwdkuch: $("#txtPwd").val(),
+                        userkuch: $("#utype").val()
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    $("#msgSpan").html(respStrr);
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+    <!--------------LOGIN-----AJAX btnclick----------------->
+    <script>
+        $(document).ready(function () {
+            $("#btnLogin").click(function () {
+                let obj = {
+                    url: "/login-route",
+                    data: {
+                        emailLogin: $("#txtEmail2").val(),
+                        pwdLogin: $("#txtPwd2").val(),
+                        
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    $("#msgSpan2").html(respStrr);
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+
+    <!-------------------signup blur ajax----------------->
+    <script>
+        $(document).ready(function () {
+            $("#txtEmail").blur(function () {
+                let email = $("#txtEmail").val();
+                if (email == "") return;
+                let obj = {
+                    url: "/email-check",
+                    data: {
+                        emailcheck: $("#txtEmail").val()
+                    }
+                }
+                $.ajax(obj).then(function (respStrr) {
+                    alert(respStrr);
+
+                    $("#txtEmail").val("");   // clear textbox
+                    $("#txtEmail").focus();   // put cursor back
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR.responseText);
+                    alert(jqXHR.responseText);
+                })
+            })
+        })
+    </script>
+    <!--for password eeye signup-->
+    <script>
+        $(document).ready(function () {
+
+            $("#eyee").click(function () {
+
+                if ($("#txtPwd").attr("type") == "password") {
+                    $("#txtPwd").attr("type", "text");
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+                else {
+                    $("#txtPwd").attr("type", "password");
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+
+            });
+
+        });
+    </script>
+    <!-------------login eye-->
+    <script>
+
+        $(document).ready(function () {
+
+            $("#eyel").click(function () {
+                //for adding new class prev is to be removed
+                if ($("#txtPwd2").attr("type") == "password") {
+                    $("#txtPwd2").attr("type", "text");
+                    $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+                else {
+                    $("#txtPwd2").attr("type", "password");
+                    $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+                }
+
+            });
+
+        });
+    </script>
+
+    <!------------regex---------->
+    <script>
+        $(document).ready(function () {
+            $("#txtEmail").blur(function () {
+                let e = $(this).val();
+                if (e == "") return;
+                let emailReg = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+                if (!emailReg.test(e)) {
+                    alert("INVALID EMAIL");
+                    $(this).val("").focus();
+
+                }
+            })
+            $("#txtPwd").blur(function () {
+                let pwd = $(this).val();
+                if (pwd == "") return;
+                let pwdReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+                if (!pwdReg.test(pwd)) {
+                    alert("INVALID PASS")
+                    $(this).val("").focus();
+
+                }
+            });
+        })
+    </script>
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <button class="btn btn-outline-success me-2" type="button" data-bs-toggle="modal"
+                        data-bs-target="#signupModal" style="font-size: 40px;">SIGN-UP</button>
+                    <button class="btn btn-outline-success" type="button" data-bs-toggle="modal"
+                        data-bs-target="#loginModal" style="font-size: 40px;">LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-------------------------------------------------------->
+    <center>
+      <a href="/admin-dashboard" style="font-size: 40px;">ADMIN DASHBOARD</a>
+      <br>
+        
+        <a href="/donor-dashboard" style="font-size: 40px;">DONOR DASHBOARD</a>
+        <br>
+        <a href="/ngo-page" style="font-size: 40px;">NGO DASHBOARD</a>
+        <br>
+        
+        <a href="/needy-dashboard" style="font-size: 40px;" >NEEDY DASHBOARD</a>\
+                <br>
+        <a href="/starting-page" style="font-size: 40px;">STARTING PAGE</a>
+        <br>
+        <a href="/needy-profile" style="font-size: 40px;">NEEDY PROFLIE</a>
+       
+    </center>
+</body>
+
+</html>
