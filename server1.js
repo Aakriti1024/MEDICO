@@ -20,6 +20,12 @@ myysqlcon.connect(function (err) {
     }
 })
 
+
+app.get("/", function (req, resp) {
+    var path = __dirname + "/public/startingpage.html";
+    resp.sendFile(path);
+})
+
 //------------cloudinary
 
 var fileuploader = require("express-fileupload");
