@@ -1,24 +1,26 @@
 <html>
-
+ 
 <head>
     <title>
         equipment avail
     </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
+ 
     <!-- Bootstrap JS -->
-
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+ 
     <script>
         function doShowPrev(profilePic, prevv) {
             const file = profilePic.files[0];
-
+ 
             if (file) {
                 prevv.src = URL.createObjectURL(file);
             }
@@ -26,21 +28,21 @@
     </script>
     <script>
         $(document).ready(function () {
-
+ 
             $("#sale").change(function () {
                 if ($(this).is(":checked")) {
                     $("#amount").prop("disabled", false);
                     $("#amount").val("");
                 }
             });
-
+ 
             $("#donation").change(function () {
                 if ($(this).is(":checked")) {
                     $("#amount").val("0");
                     $("#amount").prop("disabled", true);
                 }
             });
-
+ 
         });
     </script>
      <script>
@@ -50,125 +52,118 @@ function setemail(){
     document.getElementById("txtEmailequip").readOnly=true;
 }
     </script>
-
+ 
 </head>
-
+ 
 <body style="background:linear-gradient(to right,#eef7f0,#f8fcf9);  background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;" onload="setemail();">
-  <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
-        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
-            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
-                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
-
-        </div>
-        <div class="container">
-
-
-
-            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary py-2">
+        <div class="container-fluid">
+ 
+            <a class="navbar-brand" href="startingpage.html">
+                <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png" style="height: 130px; max-height: 130px;">
+            </a>
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+ 
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-
-                   <li class="nav-item mx-5" style="font-size: 30px;">
+ 
+                   <li class="nav-item mx-2">
     <a class="nav-link" href="donor-dashboard.html">
         <i class="fa-solid fa-person me-1"></i>
         Donor Page
     </a>
 </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="donor-profile.html">
                             <i class="fa-solid fa-hand-holding-heart me-1"></i>
                             Profile
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="availEquip.html">
-                             <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                             <i class="fa-solid fa-wheelchair"></i>
                             Equipment
                         </a>
                     </li>
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="availmed.html">
                             <i class="fa-solid fa-pills"></i>
                             Medicines
                         </a>
                     </li>
-
-
+ 
+ 
                 </ul>
-
+ 
             </div>
-
+ 
         </div>
     </nav>
-    <br> <br> <br> <br> <br> <br> <br> <br> <br>
-    <div class="container-fluid px-lg-5 px-3">
-
+    <div class="container-fluid px-lg-5 px-3" style="margin-top: 110px;">
+ 
         <form action="availEquip" enctype="multipart/form-data" method="post">
-
-            <div class="container-fluid mt-4 mb-4" style="max-width:2400px;">
-
+ 
+            <div class="container-fluid mt-4 mb-4">
+ 
                 <!-- Heading -->
-                <div class="text-center text-white shadow" style="background:linear-gradient(to right,#2ebe6a,#198754);
-                           height:100px;
-                           line-height:100px;
-                           font-size:clamp(2rem,4vw,4rem);
-                           font-weight:bold;
-                           border-radius:20px 20px 0 0;
-                             background: #1976D2;
-    color: white;">
+                <div class="text-center text-white shadow fs-2 fw-bold py-3" style="background:#1976D2; border-radius:20px 20px 0 0;">
                     Medical Equipments
                 </div>
-
+ 
                 <!-- Form Body -->
                 <div style="background:white;
-                            padding:50px;
+                            padding:40px;
                             border-radius:0 0 20px 20px;
                             box-shadow:0px 5px 20px rgba(0,0,0,0.12);">
-
+ 
                     <!-- Email -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Email ID
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
                             <input type="email" class="form-control" name="email" value="abcde@gmail.com" id="txtEmailequip"
-                                style="font-size:30px;height:65px;" required>
+                                required>
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Equipment Type -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Medical Equipment Type
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
                             <input type="text" class="form-control" name="equipment" value="wheelchair"
-                                style="font-size:30px;height:65px;" required>
+                                required>
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Condition -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Condition
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
-                            <select class="form-select" name="condition" style="font-size:30px;height:65px;" required>
+                            <select class="form-select" name="condition" required>
                                 <option selected disabled>Select Condition</option>
                                 <option>Excellent</option>
                                 <option>Very Good</option>
@@ -177,140 +172,133 @@ function setemail(){
                                 <option>Needs Repair</option>
                             </select>
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Listing Type -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Listing Type
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
-
-                            <div class="form-check form-check-inline me-5">
+ 
+                            <div class="form-check form-check-inline me-4">
                                 <input class="form-check-input" type="radio" name="listingType" id="donation"
                                     value="donation" required>
-
-                                <label class="form-check-label" for="donation" style="font-size:40px;">
+ 
+                                <label class="form-check-label fs-5" for="donation">
                                     Donation
                                 </label>
                             </div>
-
+ 
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="listingType" id="sale" value="sale">
-
-                                <label class="form-check-label" for="sale" style="font-size:40px;">
+ 
+                                <label class="form-check-label fs-5" for="sale">
                                     Sale
                                 </label>
                             </div>
-
+ 
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Amount -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Amount
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
                             <input type="number" id="amount" name="amountname" class="form-control"
-                                placeholder="Enter Amount" value="0" style="font-size:30px;height:65px;" required>
+                                placeholder="Enter Amount" value="0" required>
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Pictures -->
-                    <div class="row mt-5">
-
+                    <div class="row mt-4">
+ 
                         <div class="col-12 col-md-6 text-center mb-4">
-
-                            <label class="form-label" style="font-size:40px;font-weight:bold;color: #1976D2">
+ 
+                            <label class="form-label fs-5 fw-bold" style="color: #1976D2">
                                 Picture 1
                             </label>
-
+ 
                             <br>
-
-                            <img src="pics1/profile.png" width="360" height="360" class="img-thumbnail shadow"
-                                style="border-radius:15px;max-width:100%;height:auto;" id="objPrev">
-
+ 
+                            <img src="pics1/profile.png" class="img-thumbnail shadow"
+                                style="border-radius:15px; width:220px; height:220px; object-fit:cover;" id="objPrev">
+ 
                             <br><br>
-
-                            <input type="file" required class="form-control" style="font-size:20px;height:60px;" name="objpic"
+ 
+                            <input type="file" required class="form-control" name="objpic"
                                 id="objPic" accept="image/*" onchange="doShowPrev(objPic,objPrev)" required>
-
+ 
                         </div>
-
+ 
                         <div class="col-12 col-md-6 text-center mb-4">
-
-                            <label class="form-label" style="font-size:40px;font-weight:bold;color: #1976D2">
+ 
+                            <label class="form-label fs-5 fw-bold" style="color: #1976D2">
                                 Picture 2
                             </label>
-
+ 
                             <br>
-
-                            <img src="pics1/profile.png" width="360" height="360" class="img-thumbnail shadow"
-                                style="border-radius:15px;max-width:100%;height:auto;" id="prevv">
-
+ 
+                            <img src="pics1/profile.png" class="img-thumbnail shadow"
+                                style="border-radius:15px; width:220px; height:220px; object-fit:cover;" id="prevv">
+ 
                             <br><br>
-
-                            <input type="file" required class="form-control" style="font-size:20px;height:60px;"
+ 
+                            <input type="file" required class="form-control"
                                 name="profilePicc" id="profilePic" accept="image/*"
                                 onchange="doShowPrev(profilePic,prevv)" required>
-
+ 
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Other Information -->
                     <div class="row mb-4 align-items-center">
-
+ 
                         <div class="col-12 col-md-3 mb-2">
-                            <label class="form-label" style="font-size:40px;font-weight:600;color:#2c3e50;">
+                            <label class="form-label fs-5 fw-semibold" style="color:#2c3e50;">
                                 Other Information
                             </label>
                         </div>
-
+ 
                         <div class="col-12 col-md-9">
-                            <textarea class="form-control" name="otherinfo" rows="5" style="font-size:22px;" required></textarea>
+                            <textarea class="form-control" name="otherinfo" rows="5" required></textarea>
                         </div>
-
+ 
                     </div>
-
+ 
                     <!-- Submit -->
-                    <div class="row mt-5">
+                    <div class="row mt-4">
                         <div class="col text-center">
-
-                            <input type="submit" value="Avail for the Needy" class="btn text-white shadow" style="width:500px;
-                                       max-width:100%;
-                                       height:70px;
-                                       font-size:35px;
-                                       font-weight:bold;
-                                      background: #1976D2;
-    color: white;
-    border: none;">
-
+ 
+                            <input type="submit" value="Avail for the Needy" class="btn text-white shadow fw-bold" style="min-width:280px; background: #1976D2; border: none;">
+ 
                         </div>
                     </div>
-
+ 
                 </div>
-
+ 
             </div>
-
+ 
         </form>
-
+ 
     </div>
-
+ 
 </body>
-
-
-
+ 
+ 
+ 
 </html>
