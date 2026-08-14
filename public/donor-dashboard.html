@@ -1,29 +1,29 @@
 <html>
-
+ 
 <head>
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         DONOR DASHBOARD
     </title>
-
+ 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
+ 
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
-
+ 
     <!--ANGULLLLLAAAAARRRRRRRR-->
     <script>
         let myModule = angular.module("mouduleKuch", []);
         let myController = myModule.controller("controllerKuch", function ($scope, $http) {
             $scope.fetchmed = function () {
                 let eemail = $("#txtEmail").val();
-
-
+ 
+ 
                 let url = "/fetch-medicines?e=" + eemail;
                 $http.get(url).then(function (resp) {
                     $scope.jsonarr = resp.data;
@@ -32,51 +32,51 @@
                 }
                 )
             }
-
+ 
             // $scope.count;
-
+ 
             //add medcine +
             $scope.addmed = function (obj) {
                 let qtyy = ++obj.qty;
                 let url = "/add-that-medicine?qy=" + qtyy + "&ridno=" + obj.rid;
                 $http.get(url).then(function (resp) {
-
+ 
                 }, function (err) {
                     alert(err.message);
                 })
             }
-
+ 
             //sub medcine -
             $scope.submed = function (obj) {
                 let qtyy = --obj.qty;
                 let url = "/sub-that-medicine?qy=" + qtyy + "&ridno=" + obj.rid;
                 $http.get(url).then(function (resp) {
-
+ 
                 }, function (err) {
                     alert(err.message);
                 })
             }
-
+ 
             //dlt medicine
             $scope.dltmed = function (obj) {
                 let record = obj.rid;
                 let url = "/dlt-that-medicine?riid=" + record;
                 $http.get(url).then(function (resp) {
                     $scope.fetchmed();
-
+ 
                 }, function (err) {
                     alert(err.message);
                 }
                 )
             }
-
+ 
             //================for equipment============
-
+ 
             //equip fetch
             $scope.fetchequip = function () {
                 let eemail = $("#txtEmail1").val();
-
-
+ 
+ 
                 let url = "/fetch-equip?e=" + eemail;
                 $http.get(url).then(function (resp) {
                     $scope.jsonarr = resp.data;
@@ -91,17 +91,17 @@
                 let url = "/dlt-that-equip?riid=" + record;
                 $http.get(url).then(function (resp) {
                     $scope.fetchequip();
-
+ 
                 }, function (err) {
                     alert(err.message);
                 }
                 )
             }
-
+ 
         //for email auto matic
             //for password change in settings
             $scope.changepass = function () {
-
+ 
                 let email = $("#txtEmail2").val();
                 let opass = $("#txtOldPass").val();
                 let npass = $("#txtNewPass").val();
@@ -116,11 +116,11 @@
                 }
                 )
             }
-
+ 
         })
-
+ 
     </script>
-
+ 
     <script>
             //for email
             function setemail() {
@@ -142,12 +142,12 @@
                 document.getElementById("txtEmail2").readOnly= true;
             }
             
-
+ 
         
-
-
+ 
+ 
     </script>
-
+ 
     <!------------regex---------->
     <script>
         $(document).ready(function () {
@@ -158,100 +158,98 @@
                 if (!emailReg.test(e)) {
                     alert("INVALID EMAIL");
                     $(this).val("").focus();
-
+ 
                 }
             })
-
+ 
         })
     </script>
-
+ 
 <script>
  function logout(){
     localStorage.removeItem("activeuser");
     location.href="startingpage.html";
  }
 </script>
-
+ 
 </head>
-
+ 
 <body ng-app="mouduleKuch" ng-controller="controllerKuch"
     style="background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_27_36\ AM.png'); background-position: center; background-size: contain;">
-
-    <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
-        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
-            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
-                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
-
-        </div>
-        <div class="container">
-
-
-
-            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+ 
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary py-2">
+        <div class="container-fluid">
+ 
+            <a class="navbar-brand" href="startingpage.html">
+                <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png" style="height: 130px; max-height: 130px;">
+            </a>
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+ 
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item mx-5" style="font-size: 30px;margin-top: 20px;">
+                    <li class="nav-item mx-2">
                         <a class="nav-link active" href="startingpage.html">
                             <i class="fa-solid fa-house me-1"></i> Home
                         </a>
                     </li>
-
-                 <li class="nav-item mx-5" style="font-size: 30px;margin-top: 20px;">
-    <a class="nav-link" href="donor-dashboard.html">
-        <i class="fa-solid fa-person me-1"></i>
-        Donor Page
-    </a>
-</li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;margin-top: 20px;">
+ 
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="donor-dashboard.html">
+                            <i class="fa-solid fa-person me-1"></i>
+                            Donor Page
+                        </a>
+                    </li>
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="donor-profile.html">
                             <i class="fa-solid fa-hand-holding-heart me-1"></i>
                             Profile
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px;margin-top: 20px; ">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="availEquip.html">
-                            <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                            <i class="fa-solid fa-wheelchair"></i>
                             Equipment
                         </a>
                     </li>
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-top: 20px; ">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="availmed.html">
                             <i class="fa-solid fa-pills"></i>
                             Medicines
                         </a>
                     </li>
-
-
-
+ 
                 </ul>
-<button class="btn btn-outline-success" type="button"
-                style="font-size: 35px; color: white; margin-left: 670px; border-color: whitesmoke; "   onclick="logout();">LOGOUT</button>
-
-       
+ 
+                <button class="btn btn-outline-light" type="button" onclick="logout();">LOGOUT</button>
+ 
             </div>
-
+ 
         </div>
     </nav>
-<br>
+    <div style="margin-top: 110px;"></div>
+ 
     <!--design-->
     <center>
-        <div style="text-align:center; margin-top:120px;">
-
-
-            <div style="font-size:80px; font-weight:bold; color:#1976D2; margin-top:190px;">
+        <div class="text-center mt-4">
+ 
+            <div class="fs-1 fw-bold" style="color:#1976D2;">
                 Welcome, Donor!
             </div>
-
+ 
             <div style="margin:25px 0;">
                 <hr style="width:350px; display:inline-block; vertical-align:middle;">
-
-                <i class="fa-solid fa-heart-pulse" style="font-size:45px; color:#1976D2; margin:0 20px;"></i>
-
+ 
+                <i class="fa-solid fa-heart-pulse fs-2" style="color:#1976D2; margin:0 20px;"></i>
+ 
                 <hr style="width:350px; display:inline-block; vertical-align:middle;">
             </div>
-
-            <div style="font-size:30px; color:#555;">
+ 
+            <div class="fs-5" style="color:#555;">
                 Thank you for being a part of this noble cause.
                 <br>
                 Your contribution brings hope and makes a difference.
@@ -260,31 +258,28 @@
     </center>
     <!--===============MODAALLLLL forrrrr medddiiiicccninneeeee===================-->
     <div class="modal fade" id="myModal" tabindex="-1">
-        <div class="modal-dialog modal-xl" style="max-width:60%;">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
-
+ 
                 <div class="modal-header">
-                    <h1 class="modal-title" style="color: brown;">MEDICINE MANAGEMENT</h1>
+                    <h4 class="modal-title" style="color: brown;">MEDICINE MANAGEMENT</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
+ 
                 <div class="modal-body">
-                    <div style="font-size: 30px; ">
-                        Email_id :
-
-
-                        <input type="email" style="width: 50%; font-size: 30px;  margin-bottom: 20px;" name="txtEmail"
+                    <div class="mb-3">
+                        <label class="form-label">Email_id :</label>
+ 
+                        <input type="email" class="form-control" name="txtEmail"
                             id="txtEmail" placeholder="Enter your email id" required value="aakriti@gmail.com">
-                        <span id="emailcheck" style="margin-bottom:40px;"></span>
-
+                        <span id="emailcheck"></span>
+ 
                     </div>
-                    <br>
-                    <center><input type="button" value="FETCH MEDICINES" style="font-size: 30px;"
+                    <center><input type="button" value="FETCH MEDICINES"
                             class="btn btn-primary" ng-click="fetchmed();">
                     </center>
                     <div class="container mt-4">
-                        <table class="table table-bordered table-striped table-hover"
-                            style="font-size: 30px; width: 100%;">
+                        <table class="table table-bordered table-striped table-hover">
                             <thead class="table-success">
                                 <tr>
                                     <th>Sr. No</th>
@@ -294,7 +289,7 @@
                                     <th>Quantity</th>
                                 </tr>
                             </thead>
-
+ 
                             <tbody>
                                 <tr ng-repeat="obj in jsonarr">
                                     <td>{{$index+1}}</td>
@@ -302,7 +297,7 @@
                                     <td>{{obj.expdate.substring(0, obj.expdate.indexOf("T"))}}</td>
                                     <td>{{obj.packing}}</td>
                                     <td>
-
+ 
                                         <input type="button" value="+" ng-click="addmed(obj)"
                                             style=" margin-left:60px;">
                                         <input type="text" style="width:40px; margin-left: 10px;" value="{{obj.qty}}"
@@ -314,48 +309,45 @@
                                     </td>
                                 </tr>
                             </tbody>
-
+ 
                         </table>
                     </div>
                 </div>
-
-
+ 
+ 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
                 </div>
-
+ 
             </div>
         </div>
     </div>
     <!---------==============MODALAALLLLL FORROORRRR EQUUIPPMMEENTTTTT============-->
     <div class="modal fade" id="myEquip" tabindex="-1">
-        <div class="modal-dialog modal-xl" style="max-width:60%;">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
-
+ 
                 <div class="modal-header">
-                    <h1 class="modal-title" style="color: brown;">EQUIPMENT MANAGEMENT</h1>
+                    <h4 class="modal-title" style="color: brown;">EQUIPMENT MANAGEMENT</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
+ 
                 <div class="modal-body">
-                    <div style="font-size: 30px; ">
-                        Email_id :
-
-
-                        <input type="email" style="width: 50%; font-size: 30px;  margin-bottom: 20px;" name="txtEmail"
+                    <div class="mb-3">
+                        <label class="form-label">Email_id :</label>
+ 
+                        <input type="email" class="form-control" name="txtEmail"
                             id="txtEmail1" placeholder="Enter your email id" required>
-                        <span id="emailcheck" style="margin-bottom:40px;"></span>
-
+                        <span id="emailcheck"></span>
+ 
                     </div>
-                    <br>
-                    <center><input type="button" value="FETCH EQUIPMENTS" style="font-size: 30px;"
+                    <center><input type="button" value="FETCH EQUIPMENTS"
                             class="btn btn-primary" ng-click="fetchequip();">
                     </center>
                     <div class="container mt-4">
-                        <table class="table table-bordered table-striped table-hover"
-                            style="font-size: 30px; width: 100%;">
+                        <table class="table table-bordered table-striped table-hover">
                             <thead class="table-success">
                                 <tr>
                                     <th>Sr. No</th>
@@ -365,7 +357,7 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-
+ 
                             <tbody>
                                 <tr ng-repeat="obj in jsonarr">
                                     <td>{{$index+1}}</td>
@@ -373,150 +365,143 @@
                                     <td>{{obj.conditions}}</td>
                                     <td>{{obj.type}}</td>
                                     <td>
-
-
+ 
+ 
                                         <input type="button" value="🗑" style=" margin-left:10px;"
                                             ng-click="dltequip(obj)">
                                     </td>
                                 </tr>
                             </tbody>
-
+ 
                         </table>
                     </div>
                 </div>
-
-
+ 
+ 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
                 </div>
-
+ 
             </div>
         </div>
     </div>
     <!--===============MODAALLL FORRR SETTINGSSSS=================-->
     <div class="modal fade" id="settings" tabindex="-1">
-        <div class="modal-dialog modal-xl" style="max-width:60%;">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
-
+ 
                 <div class="modal-header">
-                    <h1 class="modal-title" style="color: brown;">SETTINGS</h1>
+                    <h4 class="modal-title" style="color: brown;">SETTINGS</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-
+ 
                 <div class="modal-body">
                     <div class="mb-4">
-                        <label class="form-label " style="font-size:35px;">
+                        <label class="form-label">
                             Email ID
                         </label>
                         <input type="email" class="form-control" id="txtEmail2" placeholder="Enter Email ID"
-                            style="height:55px;font-size:30px;" disabled>
+                            disabled>
                     </div>
-
+ 
                     <div class="mb-4">
-                        <label class="form-label" style="font-size:35px;">
+                        <label class="form-label">
                             Old Password
                         </label>
-                        <input type="password" class="form-control" id="txtOldPass" placeholder="Enter Old Password"
-                            style="height:55px;font-size:30px;">
+                        <input type="password" class="form-control" id="txtOldPass" placeholder="Enter Old Password">
                     </div>
-
+ 
                     <div class="mb-4">
-                        <label class="form-label" style="font-size:35px;">
+                        <label class="form-label">
                             New Password
                         </label>
-                        <input type="password" class="form-control" id="txtNewPass" placeholder="Enter New Password"
-                            style="height:55px;font-size:30px;">
+                        <input type="password" class="form-control" id="txtNewPass" placeholder="Enter New Password">
                     </div>
-                    <center><input type="button" value="Change" style="font-size: 30px;" class="btn btn-primary"
+                    <center><input type="button" value="Change" class="btn btn-primary"
                             ng-click="changepass();">
                     </center>
                 </div>
-
-
+ 
+ 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="font-size: 30px;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Close
                     </button>
                 </div>
-
+ 
             </div>
         </div>
     </div>
     <!--=============CAARRRRRDDDDDDD=================-->
-    <center>
-        <div class="card"
-            style="width: 30rem; border-radius: 150px; height: 500px; float: left; margin-left: 700px; margin-top: 90px; border-color: white ;border-width: 5px;box-shadow: 0 12px 30px rgba(0,0,0,0.2); ">
-            <img src="pics1/user-icon-member-login-isolated-vector.jpg.webp" style=" width: 300px;height: 280px;"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="/donor-prof" class="btn btn-primary" style="width: 300px; height:60px;  font-size: 30px;">OPEN
-                    PROFILE
-                </a>
+    <div class="container my-5">
+        <div class="row g-4 justify-content-center">
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/user-icon-member-login-isolated-vector.jpg.webp" style="height: 200px; object-fit: contain;"
+                        class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="/donor-prof" class="btn btn-primary w-100">OPEN PROFILE</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card"
-            style="width: 30rem; border-radius: 150px; margin-top: 90px;height: 500px; float: left; margin-left: 50px; border-color: white ; box-shadow: 0 12px 30px rgba(0,0,0,0.2);">
-            <img src="pics1/medical-pill-logo_1134503-791.jpg.avif" style=" width: 300px;height: 280px;"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="/avail-med" class="btn btn-primary" style="width: 300px; height:60px; font-size: 30px; ">ADD
-                    MEDICINE</a>
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/medical-pill-logo_1134503-791.jpg.avif" style="height: 200px; object-fit: contain;"
+                        class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="/avail-med" class="btn btn-primary w-100">ADD MEDICINE</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card"
-            style=" border-radius: 150px; box-shadow: 0 12px 300px rgba(0,0,0,0.2); border-color: white ; width: 30rem;margin-top: 90px; height: 500px; float: left; margin-left: 50px;">
-            <img src="pics1/images.png" style=" width: 300px;height: 280px;" class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="/availEquip" class="btn btn-primary" style="width: 300px; height:60px; font-size: 30px;">ADD
-                    EQUIPMENT</a>
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/images.png" style="height: 200px; object-fit: contain;" class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="/availEquip" class="btn btn-primary w-100">ADD EQUIPMENT</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card"
-            style="width: 30rem; border-radius:150px;box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: white ;  float: left; margin-left: 700px; margin-top: 50px; height: 500px;">
-            <img src="pics1/Medical-Management-Logo2311aa-1-1.jpg" style=" width: 300px;height: 280px;"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"
-                    style="width: 300px; height:100px; font-size: 30px;" onclick="setemail();">MEDICINE MANAGEMENT</a>
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/Medical-Management-Logo2311aa-1-1.jpg" style="height: 200px; object-fit: contain;"
+                        class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="#" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal"
+                            onclick="setemail();">MEDICINE MANAGEMENT</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <br>
-        <div class="card"
-            style="width: 30rem; border-radius:150px; box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: white ; height: 500px; float: left; margin-left: 50px;  margin-top: 50px;">
-            <img src="pics1/EM-Logo-Website.jpg" style=" width: 300px;height: 280px; margin-top: 25px;" class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myEquip"
-                    style="width: 300px; height:100px; font-size: 30px;" onclick="setemail1();">EQUIPMENT
-                    MANAGEMENT</a>
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/EM-Logo-Website.jpg" style="height: 200px; object-fit: contain;" class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="#" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myEquip"
+                            onclick="setemail1();">EQUIPMENT MANAGEMENT</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card"
-            style="width: 30rem; border-radius:150px; box-shadow: 0 12px 30px rgba(0,0,0,0.2); border-color: white ;height: 500px; float: left; margin-left: 50px; margin-top: 50px;">
-            <img src="pics1/windows-settings-icon-logo-png_seeklogo-479848.png" style=" width: 300px;height: 280px; margin-top: 40px;"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-
-                <br>
-                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#settings"
-                    style="width: 300px; height:60px; font-size: 30px;" onclick="setemail2();">SETTINGS</a>
+ 
+            <div class="col-md-4 col-lg-3">
+                <div class="card h-100 shadow" style="border-radius: 30px;">
+                    <img src="pics1/windows-settings-icon-logo-png_seeklogo-479848.png" style="height: 200px; object-fit: contain;"
+                        class="card-img-top p-3" alt="...">
+                    <div class="card-body text-center">
+                        <a href="#" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#settings"
+                            onclick="setemail2();">SETTINGS</a>
+                    </div>
+                </div>
             </div>
+ 
         </div>
-    </center>
-
+    </div>
+ 
 </body>
-
+ 
 </html>
-
-
