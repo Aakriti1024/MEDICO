@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         equipment cards
     </title>
@@ -48,64 +50,62 @@
 </head>
 
 <body ng-app="modulekuj" ng-controller="controllerkuj" ng-init="fetcheqpcards();" style=" background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;">
-  <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
-        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
-            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
-                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
-
-        </div>
-        <div class="container">
-
-
-
-            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
+        <div class="container-fluid">
+ 
+            <a class="navbar-brand" href="startingpage.html">
+                <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png" style="height: 65px; width: auto; max-height: 65px;">
+            </a>
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+ 
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-
-                    <li class="nav-item mx-5" style="font-size: 30px;">
-                        <a class="nav-link active" href="admin-dashboard.html">
+ 
+                    <li class="nav-item mx-2">
+                        <a class="nav-link active" href="startingpage.html">
                             <i class="fa-solid fa-house me-1"></i> Home
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="admin-users-dash.html">
                             <i class="fa-solid fa-hand-holding-heart me-1"></i>
                             Users
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="admin-donors-dash.html">
-                            <i class="fa-solid fa-droplet"></i>
+                           <i class="fa-solid fa-droplet" ></i>
                             Donors
                         </a>
                     </li>
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                     <li class="nav-item mx-2">
                         <a class="nav-link" href="medicineinfo.html">
-                            <i class="fa-solid fa-pills"></i>
+                            <i class="fa-solid fa-pills" ></i>
                             Medicines
                         </a>
                     </li>
-
-
+ 
                    
-<li class="nav-item mx-5" style="font-size: 30px; ">
+<li class="nav-item mx-2">
                         <a class="nav-link" href="admin-equip.html">
-                           <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                           <i class="fa-solid fa-wheelchair"></i>
                             Equipments
                         </a>
                     </li>
-
                 </ul>
-
+ 
             </div>
-
+      
         </div>
     </nav>
     <form action="ngoprof" enctype="multipart/form-data" method="post">
-        <br><br><br><br><br><br><br><br>
-    <div class="container-fluid px-4 mt-4">
-        <h1 class="text-center mb-4 text-success fw-bold">
+    <div class="container-fluid px-4" style="margin-top: 130px;">
+        <h1 class="text-center mb-4 text-success fw-bold fs-2">
             Available Equipments
         </h1>
 
@@ -115,29 +115,29 @@
 
                 <div class="card h-100 shadow-lg border-0">
 
-                    <img ng-src="{{obj.pic1url}}" class="card-img-top" style="height:300px; object-fit:contain;">
+                    <img ng-src="{{obj.pic1url}}" class="card-img-top" style="height:220px; object-fit:contain;">
 
                     <div class="card-body">
 
-                        <h3 class="card-title text-center text-primary fw-bold">
+                        <h3 class="card-title text-center text-primary fw-bold fs-4">
                             {{obj.equipment}}
                         </h3>
 
                         <hr>
 
                       
-                        <p class="fs-5">
+                        <p class="fs-6">
                             <i class="fa-solid fa-box"></i>
                             <b> Type:</b> {{obj.type}}
                         </p>
 
-                        <p class="fs-5">
+                        <p class="fs-6">
                             <i class="fa-solid fa-hand-holding-dollar" ></i></i>
                             <b> Amount:</b> {{obj.amount}}
                         </p>
                         <p>
                             <center>
-                                <input type="button" class="btn btn-primary" value="Fetch info" style="font-size: 20px;"
+                                <input type="button" class="btn btn-primary" value="Fetch info"
                                     ng-click="fetchinfo(obj);" data-bs-toggle="modal" data-bs-target="#fettch">
                             </center>
                         </p>
@@ -156,14 +156,14 @@
     <!-- Modal -->
     <div class="modal fade" id="fettch" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" style="max-width: 2000px;">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div style="font-size: 50px;">Medicine Details</div>
+                    <div class="fs-3 fw-bold">Medicine Details</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>Equipment</th>
                             
@@ -184,9 +184,8 @@
                         </tr>
                     </table>
                     <br>
-                    <br>
-                    <p style="font-size: 50px;">Donor Details</p>
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <p class="fs-3">Donor Details</p>
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>Email id</th>
                             <th>Name</th>
@@ -207,7 +206,7 @@
 
                     </table>
                     <br>
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>
                                 Adhar card
@@ -218,10 +217,10 @@
                         </tr>
                         <tr ng-repeat="obj in objdonorr">
                             <td>
-                               <center> <img src="{{obj.acardpath}}"  style="width:300px; height:300px; object-fit:cover; border-radius:5px;"></center>
+                               <center> <img src="{{obj.acardpath}}"  style="width:180px; height:180px; object-fit:cover; border-radius:5px;"></center>
                             </td>
                             <td>
-                               <center> <img src="{{obj.picpath}}" style="width:300px; height:300px; object-fit:cover; border-radius:5px;"></center>
+                               <center> <img src="{{obj.picpath}}" style="width:180px; height:180px; object-fit:cover; border-radius:5px;"></center>
                             </td>
                         </tr>
                     </table>
@@ -230,7 +229,7 @@
 
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" style="font-size: 30px;"
+                    <button type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Close</button>
 
                 </div>
