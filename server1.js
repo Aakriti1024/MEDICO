@@ -719,83 +719,78 @@ app.get("/needy-profile", function (req, resp) {
 //ai read pic 
 //gen ai 
 //aiaiaiaiaiaiaiiaiaiiiaiaiaiaiaiaiaiaiiaiaiaiaiaiaiiaiaiaiaiaiaiaiiaiaiaiaiaiiaiaiaia
-
-
-const{GoogleGenerativeAI}=require("@google/generative-ai");
-const genAI=new GoogleGenerativeAI(process.env.GEMINI_API_KEY); 
-const model=genAI.getGenerativeModel({model:"gemini-3.5-flash"});
+const { GoogleGenAI } = require("@google/genai");
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 
 app.post("/ai-read-pic", async function(req,resp){
 
-      //we have now urls of both now send to chirag that we have that will scan imag e
-    async function AakritiChirag(imgurl) {
-        const myprompt="read the text on picture and tell all the information in adhaar card and give output strictly  in JSON format {adhaar_number:'', name:'', gender:'', dob: ''}. Dont give output as string."   
-        const imageResp = await fetch(imgurl)
+//we have now urls of both now send to chirag that we have that will scan imag e
+async function AakritiChirag(imgurl) {
+const myprompt="read the text on picture and tell all the information in adhaar card and give output strictly  in JSON format {adhaar_number:'', name:'', gender:'', dob: ''}. Dont give output as string."   
+const imageResp = await fetch(imgurl)
         .then((response)=>response.arrayBuffer());
 
-        console.log("GEMINI KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+console.log("GEMINI KEY EXISTS:", !!process.env.GEMINI_API_KEY);
 console.log("GEMINI KEY LENGTH:", process.env.GEMINI_API_KEY?.length);
-        const result=await model.generateContent([
-            {
-                inlineData:{
-                    data:Buffer.from(imageResp).toString("base64"),
-                    mimeType:"image/jpeg",
-                },
+const result = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [
+        { text: myprompt },
+        {
+            inlineData: {
+                data: Buffer.from(imageResp).toString("base64"),
+                mimeType: "image/jpeg",
             },
-            myprompt,
-        ]);
-        console.log(result.response.text())
-        const cleaned=result.response.text().replace(/```json|```/g,' ').trim();
-        const jsonData=JSON.parse(cleaned);
-        console.log(jsonData);
-        return jsonData;
+        },
+    ],
+});
+console.log(result.text)
+const cleaned=result.text.replace(/```json|```/g,' ').trim();
+const jsonData=JSON.parse(cleaned);
+console.log(jsonData);
+return jsonData;
     }
- 
 
-    //front
-    let jsonbacka;
-    let jsonfronta;
-    let msg1 = "file not uploaed";
-    let myyurl1 = "nopic.jpg";
-    if (req.files  && req.files.afrontpic) {
+//front
+let jsonbacka;
+let jsonfronta;
+let msg1 = "file not uploaed";
+let myyurl1 = "nopic.jpg";
+if (req.files  && req.files.afrontpic) {
 
-        let fileNameA = req.files.afrontpic.name;
-        let fullPathA = __dirname + "/uploads/" + fileNameA;  //
-        await req.files.afrontpic.mv(fullPathA);
-        //   resp.send(fileName);
-        msg1 = "file uploaded";
+let fileNameA = req.files.afrontpic.name;
+let fullPathA = __dirname + "/uploads/" + fileNameA;  //
+await req.files.afrontpic.mv(fullPathA);
+//   resp.send(fileName);
+msg1 = "file uploaded";
 
-        await cloudinary.uploader.upload(fullPathA).then(async function (picUrlResult) {
-            myyurl1 = picUrlResult.url;
-            console.log("");
-            console.log(myyurl1);
-            jsonfronta =await AakritiChirag(myyurl1);
-           
+await cloudinary.uploader.upload(fullPathA).then(async function (picUrlResult) {
+myyurl1 = picUrlResult.url;
+console.log("");
+console.log(myyurl1);
+jsonfronta =await AakritiChirag(myyurl1);
         });
     }
 
-    //back
-    let msg2 = "file not uploaed";
-    let myyurl2 = "nopic.jpg";
-    if (req.files  && req.files.abackpic) {
+//back
+let msg2 = "file not uploaed";
+let myyurl2 = "nopic.jpg";
+if (req.files  && req.files.abackpic) {
 
-        let fileNameb = req.files.abackpic.name;
-        let fullPathb = __dirname + "/uploads/" + fileNameb;  //
-        await req.files.abackpic.mv(fullPathb);
-        //   resp.send(fileName);
-        msg2 = "file uploaded";
+let fileNameb = req.files.abackpic.name;
+let fullPathb = __dirname + "/uploads/" + fileNameb;  //
+await req.files.abackpic.mv(fullPathb);
+//   resp.send(fileName);
+msg2 = "file uploaded";
 
-        await cloudinary.uploader.upload(fullPathb).then( async function (picUrlResult) {
-            myyurl2 = picUrlResult.url;
-            console.log("");
-            console.log(myyurl2);
-              jsonbacka =await AakritiChirag(myyurl2);
-          
+await cloudinary.uploader.upload(fullPathb).then( async function (picUrlResult) {
+myyurl2 = picUrlResult.url;
+console.log("");
+console.log(myyurl2);
+jsonbacka =await AakritiChirag(myyurl2);
         });
     }
-   
-    
 
 
 let e=req.body.txtemailn;
@@ -803,12 +798,11 @@ let m=req.body.txtmobilen;
 let a=jsonfronta.adhaar_number;
 let n=jsonfronta.name;
 myysqlcon.query("insert into needys values (?,?,?,?,?,?)",[e,m,n,a,myyurl1,myyurl2],function(err,result){
-    if(err==null){
-        resp.redirect("needy-dash.html");
+if(err==null){
+resp.redirect("needy-dash.html");
     }
-    else{
-        resp.send(err.message);
+else{
+resp.send(err.message);
     }
 })
-  
-})   
+})
