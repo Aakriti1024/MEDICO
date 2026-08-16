@@ -1,15 +1,17 @@
 <html>
-
+ 
 <HEAD>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <TITLE>
         NGOOOOOOOO
     </TITLE>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
+ 
     <!-- Bootstrap JS -->
-
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -54,206 +56,208 @@
                 //in javascript no brackets just direct 
                 let edonor = obj.emailid
                 let url = "/fetch-donor-details?email=" + edonor;
-
+ 
                 $http.get(url).then(function (resp) {
                     $scope.objdonorr = resp.data;
-
+ 
                 }, function (err) {
                     alert(err.message);
                 }
                 )
-
+ 
             }
         })
-
+ 
     </script>
 </HEAD>
-
+ 
 <BODY ng-app="modulekuj" ng-controller="controllerkuj" ng-init="fetchcities();"
     style="background:linear-gradient(to right,#eef7f0,#f8fcf9); background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;">
-    >
-      <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
-        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
-            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
-                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
-
-        </div>
-        <div class="container">
-
-
-
-            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+      <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container-fluid">
+ 
+            <a class="navbar-brand" href="startingpage.html">
+                <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"style="height: 65px; width: auto; max-height: 65px;">
+            </a>
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+ 
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-     <li class="nav-item mx-5" style="font-size: 30px;">
+ 
+              
+                     <li class="nav-item mx-2">
     <a class="nav-link" href="ngo-dashboard.html">
      <i class="fa-solid fa-user-check" style="color: rgb(244, 243, 236);"></i>
        Ngo Page
     </a>
 </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="ngo-profile.html">
                             <i class="fa-solid fa-hand-holding-heart me-1"></i>
                             Profile
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="ngofindEqp.html">
-                            <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                            <i class="fa-solid fa-wheelchair"></i>
                             Equipment
                         </a>
                     </li>
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="ngoFindMed.html">
                             <i class="fa-solid fa-pills"></i>
                             Medicines
                         </a>
                     </li>
-
-
-
-
+ 
+ 
+ 
                 </ul>
-
+                <button class="btn btn-outline-light ms-auto" type="button" onclick="logout();">LOGOUT</button>
+ 
             </div>
-
+ 
         </div>
     </nav>
-    <br><br><br> <br><br><br> <br><br><br>
-
-
-    <div
-        style="width: 2520px; height: 400px; background-color: linear-gradient(to bottom,#ffffff,#f8fbff); margin-top: 80px; margin-left: 210px; border-radius: 50px; border-color:#1976D2 ; border-width: 4px; border-style: solid; box-shadow:0 12px 30px rgba(74,144,226,0.2);">
-
-        <div style="float: left;margin-left: 100px; margin-top: 100px;">
-            <p style="font-size: 50px; color: #1976D2; font-weight: bold">
-                Choose City:
-            </p>
-            <p style="font-size: 30px;">
-                <input list="city-list" id="citysel" placeholder="type or select.."
-                    style="width: 600px; height: 70px; font-size: 40px;">
+ 
+    <div class="container-fluid px-lg-5 px-3" style="margin-top: 130px;">
+ 
+    <div class="p-4 p-md-5"
+        style="background-color:#ffffff; border-radius: 30px; border: 4px solid #1976D2; box-shadow:0 12px 30px rgba(74,144,226,0.2);">
+ 
+        <div class="row g-4 align-items-end">
+ 
+            <div class="col-md-4">
+                <p class="fs-3 fw-bold" style="color: #1976D2;">
+                    Choose City:
+                </p>
+                <input list="city-list" id="citysel" placeholder="type or select.." class="form-control">
                 <datalist id="city-list">
                     <option ng-repeat="obj in jsoncity" value="{{obj.city}} "></option>
-
+ 
                 </datalist>
-            </p>
+            </div>
+ 
+            <div class="col-md-5">
+                <p class="fs-3 fw-bold" style="color: #1976D2;">
+                    Equipments
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <input list="med-list" id="eqpsel" placeholder="type or select.." class="form-control" style="max-width: 300px;">
+                    <datalist id="med-list">
+                        <option ng-repeat="obj in jsonmed" value="{{obj.equipment}}"></option>
+                    </datalist>
+                    <input type="button" value="choose equipment" ng-click="fetcheqpngo();"
+                        class="btn btn-primary fw-bold">
+                </div>
+            </div>
+ 
+            <div class="col-md-3">
+                <input type="button" value="get info" ng-click="fetcheqpcardss();"
+                    class="btn btn-primary fw-bold w-100">
+            </div>
+ 
         </div>
-        <div style="float: left; margin-left: 200px; margin-top: 100px;">
-            <p style="font-size: 50px; color: #1976D2; font-weight: bold">
-                Equipments
-            </p>
-            <p style="font-size: 30px;">
-                <input list="med-list" id="eqpsel" placeholder="type or select.."
-                    style="width: 600px; height: 70px; font-size: 40px;">
-                <datalist id="med-list">
-                    <option ng-repeat="obj in jsonmed" value="{{obj.equipment}}"></option>
-                </datalist>
-                <input type="button" value="choose equipment " ng-click="fetcheqpngo();"
-                    style="margin-left: 30px; width: 500px; height: 70px; color: white; font-weight: bold; font-size: 35px;  "
-                    class="btn btn-primary">
-            </p>
-        </div>
-        <div style="float:left; margin-left:-550px; margin-top:250px; font-size:30px;">
-            <input type="button" value="get info" ng-click="fetcheqpcardss();"
-                style="margin-left: -530px; width: 500px;  margin-top:30px; color: white; font-weight: bold; font-size: 35px; "
-                class="btn btn-primary">
-        </div>
-        <div>
-        </div>
-        <div class="row g-4" style="margin-top: 430px; margin-left: 80px; margin-right: 80px;">
-
+ 
+        <div class="row g-4 mt-4">
+ 
             <div class="col-lg-3 col-md-6" ng-repeat="obj in jsoncardd">
-
+ 
                 <div class="card h-100 shadow-lg border-0">
-
-                    <img ng-src="{{obj.pic1url}}" class="card-img-top" style="height:300px; object-fit:contain;">
-
+ 
+                    <img ng-src="{{obj.pic1url}}" class="card-img-top" style="height:220px; object-fit:contain;">
+ 
                     <div class="card-body">
-
-                        <h3 class="card-title text-center text-primary fw-bold">
+ 
+                        <h3 class="card-title text-center text-primary fw-bold fs-4">
                             {{obj.equipment}}
                         </h3>
-
+ 
                         <hr>
-
-
-
-                        <p class="fs-5">
+ 
+ 
+ 
+                        <p class="fs-6">
                             <i class="fa-solid fa-box"></i>
                             <b>Type:</b> {{obj.type}}
                         </p>
-
+ 
                         <p>
                             <center>
-                                <input type="button" class="btn btn-primary" value="Fetch info" style="font-size: 20px;"
+                                <input type="button" class="btn btn-primary" value="Fetch info"
                                     ng-click="fetchinfo(obj);" data-bs-toggle="modal" data-bs-target="#fetchh">
                             </center>
                         </p>
-
+ 
                     </div>
-
+ 
                 </div>
-
+ 
             </div>
-
+ 
         </div>
-
+ 
     </div>
-
-
+ 
+    </div>
+ 
+ 
     <!-- Modal -->
     <div class="modal fade" id="fetchh" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div style="font-size: 50px;">Equipment Details</div>
+                    <div class="fs-3 fw-bold">Equipment Details</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>Equipment name</th>
                             <th>Condition</th>
                             <th>Type</th>
                             <th>Amount</th>
-
+ 
                             <th>Other info.</th>
-
+ 
                         </tr>
                         <tr>
                             <td>{{objOne.equipment}}</td>
                             <td>{{objOne.conditions}}</td>
                             <td>{{objOne.type}}</td>
                             <td>{{objOne.amount}}</td>
-
+ 
                             <td>{{objOne.info}}</td>
-
+ 
                         </tr>
                     </table>
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>Picture</th>
                         </tr>
                         <td>
-                            <center><img ng-src="{{objOne.pic2url}}"></center>
+                            <center><img ng-src="{{objOne.pic2url}}" style="max-width:100%;"></center>
                         </td>
                     </table>
                     <br>
-                    <br>
-                    <p style="font-size: 50px;">Donor Details</p>
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <p class="fs-3">Donor Details</p>
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>Email id</th>
                             <th>Name</th>
                             <th>Mobile</th>
                             <th>Address</th>
                             <th>City</th>
-
-
+ 
+ 
                         </tr>
-
+ 
                         <tr ng-repeat="objdonor in objdonorr">
                             <td>{{objdonor.email_id}}</td>
                             <td>{{objdonor.name}}</td>
@@ -261,10 +265,10 @@
                             <td>{{objdonor.address}}</td>
                             <td>{{objdonor.city}}</td>
                         </tr>
-
+ 
                     </table>
                     <br>
-                    <table class="table table-success table-striped-columns" style="font-size: 27px;">
+                    <table class="table table-success table-striped-columns">
                         <tr>
                             <th>
                                 Adhar card
@@ -275,26 +279,26 @@
                         </tr>
                         <tr ng-repeat="obj in objdonorr">
                             <td>
-                                <img src="{{obj.acardpath}}" style="width:200px;height:150px;object-fit:cover;">
+                                <img src="{{obj.acardpath}}" style="width:150px;height:120px;object-fit:cover;">
                             </td>
                             <td>
-                                <img src="{{obj.picpath}}" style="width:200px;height:150px;object-fit:cover;">
+                                <img src="{{obj.picpath}}" style="width:150px;height:120px;object-fit:cover;">
                             </td>
                         </tr>
                     </table>
                 </div>
-
-
-
+ 
+ 
+ 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" style="font-size: 30px;"
+                    <button type="button" class="btn btn-secondary"
                         data-bs-dismiss="modal">Close</button>
-
+ 
                 </div>
             </div>
         </div>
     </div>
-
+ 
 </BODY>
-
+ 
 </html>
