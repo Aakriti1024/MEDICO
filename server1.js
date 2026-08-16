@@ -734,6 +734,8 @@ app.post("/ai-read-pic", async function(req,resp){
         const imageResp = await fetch(imgurl)
         .then((response)=>response.arrayBuffer());
 
+        console.log("GEMINI KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+console.log("GEMINI KEY LENGTH:", process.env.GEMINI_API_KEY?.length);
         const result=await model.generateContent([
             {
                 inlineData:{
