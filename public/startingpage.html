@@ -222,9 +222,62 @@
         })
     </script>
  
- function openAdminLogin(){
+<script>
 
- }
+$(document).ready(function () {
+
+    $("#btnAdmin").click(function () {
+
+        let passkey = $("#adminPasskey").val();
+
+        if (passkey === "") {
+            $("#adminError").text("Please enter the passkey.");
+            $("#adminError").show();
+            return;
+        }
+
+        $.ajax({
+
+            url: "/admin-login",
+            type: "POST",
+
+            data: {
+                passkey: passkey
+            },
+
+            success: function (response) {
+
+                if (response.success) {
+
+                    window.location.href = "admin-dashboard.html";
+
+                } else {
+
+                    $("#adminError")
+                        .text("Incorrect Admin Passkey")
+                        .show();
+
+                }
+
+            },
+
+            error: function (err) {
+
+                console.log(err);
+
+                $("#adminError")
+                    .text("Server error. Please try again.")
+                    .show();
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
  
 </head>
  
@@ -233,7 +286,7 @@
     <!--modall for admiinnnnnnnnnnnn-->
     <!-- ADMIN LOGIN MODAL -->
 
-<div class="modal fade" id="adminLoginModal" tabindex="-1">
+<div class="modal fade" id="admin" tabindex="-1">
 
     <div class="modal-dialog modal-dialog-centered">
 
@@ -257,7 +310,7 @@
 
             <div class="modal-body p-4">
 
-                <form id="adminPassForm">
+             
 
                     <label class="form-label fw-semibold">
                         Enter Admin Passkey
@@ -276,16 +329,10 @@
                     </div>
 
 
-                    <button type="submit"
-                            class="btn text-white w-100 mt-3"
-                            style="background:#1976D2;">
-
-                        <i class="fa-solid fa-lock-open me-2"></i>
-                        Enter Admin Dashboard
-
-                    </button>
-
-                </form>
+                    <center><input type="button" value="OPEN ADMIN PAGE"
+                            class="btn btn-primary" id="btnAdmin">
+                    </center>
+             
 
             </div>
 
@@ -742,7 +789,7 @@
     <footer>
         Copyright © 2026 Medical Donation Portal | All Rights Reserved
         <a href="#"
-   onclick="openAdminLogin(); return false;"
+   onclick="openAdminLogin(); "data-bs-toggle="modal" data-bs-target="#admin"
    style="font-size:12px; color:#888; text-decoration:none;">
     Admin
 </a>
