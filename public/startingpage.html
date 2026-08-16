@@ -223,18 +223,11 @@
     </script>
  
 <script>
-
 $(document).ready(function () {
 
     $("#btnAdmin").click(function () {
 
         let passkey = $("#adminPasskey").val();
-
-        if (passkey === "") {
-            $("#adminError").text("Please enter the passkey.");
-            $("#adminError").show();
-            return;
-        }
 
         $.ajax({
 
@@ -253,9 +246,8 @@ $(document).ready(function () {
 
                 } else {
 
-                    $("#adminError")
-                        .text("Incorrect Admin Passkey")
-                        .show();
+                    $("#adminError").text("Incorrect Admin Passkey");
+                    $("#adminError").show();
 
                 }
 
@@ -265,9 +257,8 @@ $(document).ready(function () {
 
                 console.log(err);
 
-                $("#adminError")
-                    .text("Server error. Please try again.")
-                    .show();
+                $("#adminError").text("Server error");
+                $("#adminError").show();
 
             }
 
