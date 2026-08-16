@@ -806,3 +806,24 @@ resp.send(err.message);
     }
 })
 })
+
+//admin
+app.post("/admin-login", function(req, resp) {
+
+    let passkey = req.body.passkey;
+
+    if (passkey === "AAKRITISITE@MEDICO") {
+
+        resp.json({
+            success: true
+        });
+
+    } else {
+
+        resp.json({
+            success: false
+        });
+
+    }
+
+});
