@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         Admin users
     </title>
@@ -64,66 +66,65 @@
 </head>
 
 <body ng-app="modulekuj" ng-controller="controllerkuj" ng-init="doShowAll();" style=" background-image: url('pics1/ChatGPT\ Image\ Jul\ 20\,\ 2026\ at\ 10_34_19\ AM.png'); background-position: center; background-size: contain;">
-      <nav class="navbar navbar-expand-lg  fixed-top navbar-dark bg-primary" style="height: 170px;">
-        <div style="width: 4px; height: 4px; border-color: white; border-radius: 50%; ">
-            <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png"
-                style="width: 595px; height: 280px; margin-top: -130px; margin-left: -160px;">
-
-        </div>
-        <div class="container">
-
-
-
-            <div class="collapse navbar-collapse" id="menu" style="margin-left: 70px;">
+     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
+        <div class="container-fluid">
+ 
+            <a class="navbar-brand" href="startingpage.html">
+                <img src="pics1/ChatGPT Image Jul 28, 2026 at 04_40_46 PM.png" style="height: 65px; width: auto; max-height: 65px;">
+            </a>
+ 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+ 
+            <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav mx-auto">
-
-                    <li class="nav-item mx-5" style="font-size: 30px;">
-                        <a class="nav-link active" href="admin-dashboard.html">
+ 
+                    <li class="nav-item mx-2">
+                        <a class="nav-link active" href="startingpage.html">
                             <i class="fa-solid fa-house me-1"></i> Home
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; margin-left:170px;">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="admin-users-dash.html">
                             <i class="fa-solid fa-hand-holding-heart me-1"></i>
                             Users
                         </a>
                     </li>
-
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+ 
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="admin-donors-dash.html">
-                            <i class="fa-solid fa-droplet"></i>
+                           <i class="fa-solid fa-droplet" ></i>
                             Donors
                         </a>
                     </li>
-                    <li class="nav-item mx-5" style="font-size: 30px; ">
+                     <li class="nav-item mx-2">
                         <a class="nav-link" href="medicineinfo.html">
-                            <i class="fa-solid fa-pills"></i>
+                            <i class="fa-solid fa-pills" ></i>
                             Medicines
                         </a>
                     </li>
-
+ 
                    
-<li class="nav-item mx-5" style="font-size: 30px; ">
+<li class="nav-item mx-2">
                         <a class="nav-link" href="admin-equip.html">
-                           <i class="fa-solid fa-wheelchair" style="font-size: 36px;"></i>
+                           <i class="fa-solid fa-wheelchair"></i>
                             Equipments
                         </a>
                     </li>
-
-
                 </ul>
-
+ 
             </div>
-
+      
         </div>
     </nav>
     <form action="ngoprof" enctype="multipart/form-data" method="post">
-        <br><br><br><br><br><br><br><br>
     <center>
-        <br><br>
+        <div style="margin-top: 130px;"></div>
         <!--  <input type="button" value="fetch records" ng-click="doShowAll();">-->
-        <table class="table table-bordered table-striped table-hover text-center w-75 mx-auto shadow " style="font-size: 30px;">
+        <div class="table-responsive w-100">
+        <table class="table table-bordered table-striped table-hover text-center w-75 mx-auto shadow">
             <thead class="table-dark">
                 <tr>
                     <th>Sr. no</th>
@@ -153,17 +154,18 @@
                     </td>
 
                     <td class="p-0">
-                        <input type="button" ng-value="obj.current_status==1?'BLOCK' :'UNBLOCK'" style="font-size: 20px;"  ng-click="doBUNblock(obj.email_id,obj.current_status);"
+                        <input type="button" ng-value="obj.current_status==1?'BLOCK' :'UNBLOCK'" ng-click="doBUNblock(obj.email_id,obj.current_status);"
                             class="btn btn-warning w-100 h-100 rounded-0">
                     </td>
 
                     <td class="p-0">
-                        <input type="button" value="Delete" style="font-size: 20px;" class="btn btn-danger w-100 h-100 rounded-0"
+                        <input type="button" value="Delete" class="btn btn-danger w-100 h-100 rounded-0"
                             ng-click="dodlt(obj.email_id)">
                     </td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </center>
 </body>
 
