@@ -222,11 +222,78 @@
         })
     </script>
  
+ function openAdminLogin(){
+
+ }
  
 </head>
  
 <body>
  
+    <!--modall for admiinnnnnnnnnnnn-->
+    <!-- ADMIN LOGIN MODAL -->
+
+<div class="modal fade" id="adminLoginModal" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header"
+                 style="background:#1976D2; color:white;">
+
+                <h5 class="modal-title">
+                    <i class="fa-solid fa-user-shield me-2"></i>
+                    Admin Access
+                </h5>
+
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+
+            <div class="modal-body p-4">
+
+                <form id="adminPassForm">
+
+                    <label class="form-label fw-semibold">
+                        Enter Admin Passkey
+                    </label>
+
+                    <input type="password"
+                           id="adminPasskey"
+                           class="form-control"
+                           placeholder="Enter passkey"
+                           required>
+
+
+                    <div id="adminError"
+                         class="text-danger mt-2"
+                         style="display:none;">
+                    </div>
+
+
+                    <button type="submit"
+                            class="btn text-white w-100 mt-3"
+                            style="background:#1976D2;">
+
+                        <i class="fa-solid fa-lock-open me-2"></i>
+                        Enter Admin Dashboard
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
     <!-- NAVBAR -->
  
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
